@@ -1,0 +1,14 @@
+fragment articleFragment on Article {
+  title
+  subtitle
+  summary
+  uriFragment
+  featuredPhoto {
+    url
+    thumbUrl
+  }
+  categories {
+    name
+    uriFragment
+  }
+}

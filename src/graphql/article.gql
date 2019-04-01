@@ -1,0 +1,52 @@
+#import "@/graphql/articleFragment.gql"
+
+query getArticle($uriFragment: String!) {
+  article(uriFragment: $uriFragment) {
+    ...articleFragment
+    activityStatus {
+      liked
+      saved
+    }
+    author {
+      firstName
+      lastName
+      bio
+    }
+    byline {
+      author
+      photographer
+    }
+    magazines
+    content {
+      ...loadContent
+      ...on ListContent {
+        items {
+          type
+          content {
+            ...loadContent
+          }
+        }
+      }
+    }
+  }
+}
+
+# fragment specific to this query only
+fragment loadContent on IngredientContent {
+  tag
+  type
+  ...on HtmlContent {
+    html
+  }
+  ...on TextContent {
+    text
+    style
+  }
+  ...on PhotoContent {
+    photos {
+      url
+      thumbUrl
+      caption
+    }
+  }
+}

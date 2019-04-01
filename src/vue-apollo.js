@@ -2,6 +2,16 @@ import Vue from 'vue'
 import VueApollo from 'vue-apollo'
 import { createApolloClient, restartWebsockets } from 'vue-cli-plugin-apollo/graphql-client'
 
+import { IntrospectionFragmentMatcher, InMemoryCache } from "apollo-cache-inmemory";
+import introspectionQueryResultData from "@/graphql/fragmentTypes.json";
+
+
+// Fragment introspection setup
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+    introspectionQueryResultData
+  });
+  const fragmentCache = new InMemoryCache({ fragmentMatcher });
+
 // Install the vue plugin
 Vue.use(VueApollo)
 
@@ -9,7 +19,7 @@ Vue.use(VueApollo)
 const AUTH_TOKEN = 'apollo-token'
 
 // Http endpoint
-const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP || 'https://auhpndgd55.execute-api.us-west-2.amazonaws.com/dev/graphql'
+const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP
 
 // Config
 const defaultOptions = {
@@ -17,7 +27,7 @@ const defaultOptions = {
   httpEndpoint,
   // You can use `wss` for secure connection (recommended in production)
   // Use `null` to disable subscriptions
-  wsEndpoint: process.env.VUE_APP_GRAPHQL_WS || 'ws://localhost:4000/graphql',
+  wsEndpoint: null,
   // LocalStorage token
   tokenName: AUTH_TOKEN,
   // Enable Automatic Query persisting with Apollo Engine
@@ -34,7 +44,7 @@ const defaultOptions = {
   // link: myLink
 
   // Override default cache
-  // cache: myCache
+  cache: fragmentCache
 
   // Override the way the Authorization header is set
   // getAuth: (tokenName) => ...
@@ -60,7 +70,7 @@ export function createProvider (options = {}) {
     defaultClient: apolloClient,
     defaultOptions: {
       $query: {
-        // fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'network-only',
       },
     },
     errorHandler (error) {

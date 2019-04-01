@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import Locations from "./views/Locations.vue";
+import Article from "./views/Article.vue";
 
 Vue.use(Router);
 
@@ -22,6 +24,14 @@ export function createRouter() {
         // which is lazy-loaded when the route is visited.
         component: () =>
           import(/* webpackChunkName: "about" */ "./views/About.vue")
+      },
+      {
+          path: "/locs",
+          component: Locations
+      },
+      {
+          path: "/article",
+          component: Article
       }
     ]
   });

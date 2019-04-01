@@ -1,0 +1,13 @@
+query getLocations {
+  locations {
+    uriFragment
+    city
+    state
+    stateAbbreviation
+    zip
+    location {
+      lat
+      lon
+    }
+  }
+}

@@ -4,7 +4,8 @@
         {{article.title}}
     </div>-->
 
-    <ApolloQuery :query="require('@/graphql/article.gql')" :variables="{ uriFragment: 'live-your-life-in-style-with-great-design' }">
+    <div>
+        <ApolloQuery :query="require('@/graphql/article.gql')" :variables="{ uriFragment: this.$store.getters.getSlug }">
         <template slot-scope="{ result: { loading, data, error } }">
             <div v-if="data">
                 <p>DATA</p>
@@ -16,6 +17,13 @@
             <div v-else>LOADING</div>
         </template>
     </ApolloQuery>
+    
+    <button @click="handleSwitch">Switch Slug</button>
+
+    <br>
+
+    {{ this.$store.state.slug }}
+    </div>
 </template>
 
 <script>
@@ -36,5 +44,16 @@ export default {
             }
         }
     }*/
+
+    data() {
+        return {
+            querySlug: this.$store.state.slug
+        }
+    },
+    methods: {
+        handleSwitch() {
+            this.$store.commit("CHANGE_SLUG");
+        }
+    }
 }
 </script>

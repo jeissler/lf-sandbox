@@ -6,9 +6,19 @@ Vue.use(Vuex);
 export function createStore() {
   return new Vuex.Store({
     state() {
-      return {};
+      return {
+          slug: "live-your-life-in-style-with-great-design"
+      };
     },
-    mutations: {},
-    actions: {}
+    mutations: {
+        CHANGE_SLUG(state) {
+            state.slug = "fit-to-last"
+        }
+    },
+    getters: {
+        getSlug: state => {
+            return state.slug
+        },
+    }
   });
 }

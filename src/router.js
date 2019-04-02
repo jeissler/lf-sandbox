@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Locations from "./views/Locations.vue";
 import Article from "./views/Article.vue";
+import TestHome from "./views/TestHome.vue";
 
 Vue.use(Router);
 
@@ -32,6 +33,13 @@ export function createRouter() {
       {
           path: "/article",
           component: Article
+      },
+      {
+          path: "/test-home",
+          component: TestHome
+      },
+      {
+          path: "/test-"
       }
     ]
   });

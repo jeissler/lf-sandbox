@@ -4,11 +4,12 @@ import Home from "./views/Home.vue";
 import Locations from "./views/Locations.vue";
 import Article from "./views/Article.vue";
 import TestHome from "./views/TestHome.vue";
+import { test, registerAnon } from "./middleware";
 
 Vue.use(Router);
 
 export function createRouter() {
-  return new Router({
+  const router = new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
@@ -43,4 +44,8 @@ export function createRouter() {
       }
     ]
   });
+
+  router.beforeEach(registerAnon)
+
+  return router;
 }

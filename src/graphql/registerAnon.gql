@@ -1,0 +1,10 @@
+#import "@/graphql/userFragment.gql"
+
+mutation registerAnonymous($ip: IPAddress!) {
+  registerAnonymous(ip: $ip) {
+    jwt
+    user {
+      ...userFragment
+    }
+  }
+}

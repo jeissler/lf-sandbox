@@ -6,15 +6,16 @@ import { createProvider } from "./vue-apollo";
 
 Vue.config.productionTip = false;
 
-export async function createApp({
+const router = createRouter();
+const store = createStore();
+const apolloProvider = createProvider({
+    ssr: process.server
+});
+
+async function createApp({
   beforeApp = () => {},
   afterApp = () => {}
 } = {}) {
-  const router = createRouter();
-  const store = createStore();
-  const apolloProvider = createProvider({
-    ssr: process.server
-  });
 
   await beforeApp({
     router,
@@ -40,3 +41,5 @@ export async function createApp({
 
   return result;
 }
+
+export { createApp, store, apolloProvider }

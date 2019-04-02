@@ -1,0 +1,10 @@
+fragment locationFragment on Location {
+  city
+  state
+  stateAbbreviation
+  zip
+  location {
+    lat
+    lon
+  }
+}

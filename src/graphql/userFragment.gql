@@ -1,0 +1,18 @@
+#import "@/graphql/locationFragment.gql"
+
+fragment userFragment on User {
+  id
+  firstName
+  lastName
+  email
+  created
+  registered
+  emailConfirmed
+  publicationLocation {
+    uriFragment
+    ...locationFragment
+  }
+  userLocation {
+    ...locationFragment
+  }
+}

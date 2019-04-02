@@ -1,0 +1,9 @@
+#import "@/graphql/articleFragment.gql"
+
+query getTopArticles($location: GeoPointInput) {
+  topArticles(location: $location) {
+    items {
+      ...articleFragment
+    }
+  }
+}

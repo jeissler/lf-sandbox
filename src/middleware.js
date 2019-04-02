@@ -9,10 +9,10 @@ const mockIps = ["23.228.141.85", "132.148.192.43"];
 
 // global - all routes must pass anon reg
 export const registerAnon = (to, from, next) => {
-    const store = require("./main").store;
+    //const store = require("./main").store;
     const apolloClient = require("./main").apolloProvider.defaultClient;
 
-    apolloClient.mutate({ mutation: REGISTER, variables: { ip: mockIps[1] } }).then(res => {
+    apolloClient.mutate({ mutation: REGISTER, variables: { ip: mockIps[1] } }).then(() => {
         // vue-apollo provided - sets bearer token for apollo client auth
         //onLogin(apolloClient, res.data.registerAnonymous.jwt);
 
